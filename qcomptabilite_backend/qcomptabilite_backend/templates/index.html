@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="lang-ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'impact de la comptabilité internationale sur les marchés financiers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,600&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233D; --paper:#EEF1F6; --line:#C7D0DE;
+    --bronze:#9C7A32; --bronze-soft:#C9A961; --teal:#1F6F5C;
+    --danger:#9C4A3A; --white:#FCFBF8;
+    --font-display:'Aref Ruqaa', serif;
+    --font-body:'Tajawal', sans-serif;
+  }
+  html.lang-fr{ --font-display:'Cormorant Garamond', serif; --font-body:'Work Sans', sans-serif; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:42px 42px; background-position:-1px -1px;
+    color:var(--ink); font-family:var(--font-body); line-height:1.75; min-height:100vh; padding:40px 16px 80px;
+  }
+  .sheet{ max-width:860px; margin:0 auto; background:var(--white); border:1px solid var(--line);
+    box-shadow:0 1px 0 var(--line), 0 18px 40px -20px rgba(22,35,61,0.25); animation:rise .6s ease both; }
+  @keyframes rise{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;} }
+
+  /* language switch */
+  .lang-switch{
+    position:fixed; top:18px; inset-inline-end:18px; z-index:30;
+    display:flex; background:var(--ink); border:1px solid var(--ink);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; overflow:hidden;
+  }
+  .lang-switch button{
+    border:none; background:transparent; color:#AEB9D4; padding:9px 16px; cursor:pointer; transition:all .15s ease;
+  }
+  .lang-switch button.active{ background:var(--bronze-soft); color:var(--ink); font-weight:600; }
+
+  .masthead{ padding:56px 48px 30px; border-bottom:3px double var(--ink); position:relative; }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.1em; color:var(--bronze);
+    display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+  .seal{ width:56px; height:56px; border-radius:50%; border:1.5px solid var(--bronze); display:flex; align-items:center;
+    justify-content:center; flex-shrink:0; font-family:'IBM Plex Mono', monospace; font-size:9.5px; color:var(--bronze);
+    text-align:center; position:relative; }
+  .seal::before{ content:''; position:absolute; inset:5px; border:1px dashed var(--bronze-soft); border-radius:50%; }
+  .masthead h1{ font-family:var(--font-display); font-weight:700; font-size:clamp(22px,3.6vw,32px); line-height:1.4; margin:6px 0 16px; }
+  html.lang-fr .masthead h1{ font-style:italic; font-weight:600; }
+  .research-q{ background:var(--paper); border-inline-start:3px solid var(--bronze); padding:16px 20px; margin-top:18px; font-size:14px; color:#3A4763; }
+  .research-q b{ display:block; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--bronze); margin-bottom:6px; letter-spacing:.05em; }
+  .masthead .meta-row{ display:flex; gap:24px; flex-wrap:wrap; margin-top:20px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:#5A6785; }
+
+  .balance-bar{ padding:14px 48px; background:var(--ink); color:var(--white); display:flex; align-items:center;
+    justify-content:space-between; font-family:'IBM Plex Mono', monospace; font-size:13px; position:sticky; top:0; z-index:5; }
+  .balance-bar .track{ flex:1; height:4px; background:rgba(255,255,255,0.18); margin:0 18px; position:relative; overflow:hidden; }
+  .balance-bar .fill{ position:absolute; inset:0; width:0%; background:linear-gradient(90deg,var(--bronze-soft),var(--teal)); transition:width .35s ease; }
+
+  section.block{ padding:36px 48px; border-bottom:1px solid var(--line); }
+  section.block:last-of-type{ border-bottom:none; }
+  .block-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:8px; }
+  .block-num{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--bronze); border:1px solid var(--bronze-soft); padding:2px 9px; white-space:nowrap; }
+  .block-head h2{ font-family:var(--font-display); font-size:21px; font-weight:700; }
+  html.lang-fr .block-head h2{ font-style:italic; }
+  .block-desc{ color:#5A6785; font-size:13.5px; margin-bottom:22px; }
+
+  .field{ margin-bottom:24px; }
+  .field > label.q{ display:block; font-weight:500; font-size:15px; margin-bottom:10px; }
+  .field > label.q .req{ color:var(--danger); margin-inline-start:4px; }
+  .field > label.q .num{ font-family:'IBM Plex Mono', monospace; color:var(--bronze); margin-inline-end:6px; }
+
+  .choices{ display:flex; flex-wrap:wrap; gap:10px; }
+  .choice{ position:relative; }
+  .choice input{ position:absolute; opacity:0; inset:0; cursor:pointer; margin:0; }
+  .choice span{ display:inline-flex; align-items:center; padding:9px 16px; border:1px solid var(--line); background:var(--paper); font-size:14px; cursor:pointer; transition:all .15s ease; }
+  .choice input:checked + span{ background:var(--ink); color:var(--white); border-color:var(--ink); }
+  .choice input:focus-visible + span{ outline:2px solid var(--teal); outline-offset:2px; }
+  .choice:hover span{ border-color:var(--bronze); }
+
+  select{ width:100%; max-width:360px; padding:10px 14px; border:1px solid var(--line); background:var(--paper);
+    font-family:var(--font-body); font-size:14px; color:var(--ink); }
+
+  .other-input{ display:none; margin-top:10px; max-width:360px; }
+  .other-input.show{ display:block; }
+  .other-input input{ width:100%; padding:9px 12px; border:1px solid var(--line); background:var(--paper); font-family:var(--font-body); font-size:13.5px; }
+
+  .likert-header{ display:grid; grid-template-columns:1fr repeat(5,88px); gap:6px; padding:0 0 10px; font-family:'IBM Plex Mono', monospace; font-size:10px; color:#7280A0; text-align:center; }
+  .likert-header .lbl{ text-align:start; }
+  .likert-row{ display:grid; grid-template-columns:1fr repeat(5,88px); align-items:center; gap:6px; padding:13px 0; border-top:1px solid var(--line); }
+  .likert-row .stmt{ font-size:14px; padding-inline-end:10px; }
+  .likert-row .stmt b{ font-family:'IBM Plex Mono', monospace; color:var(--bronze); font-weight:500; margin-inline-end:6px; }
+  .likert-cell{ display:flex; justify-content:center; }
+  .likert-cell input{ width:18px; height:18px; accent-color:var(--teal); cursor:pointer; }
+  @media (max-width:760px){
+    .likert-header{ display:none; }
+    .likert-row{ grid-template-columns:1fr; gap:10px; padding:16px 0; }
+    .likert-row .opts{ display:flex; justify-content:space-between; }
+    .likert-cell{ flex-direction:column; gap:4px; font-size:9px; font-family:'IBM Plex Mono',monospace; color:#7280A0; }
+  }
+
+  textarea{ width:100%; min-height:100px; padding:14px; border:1px solid var(--line); background:var(--paper); font-family:var(--font-body); font-size:14px; resize:vertical; }
+
+  .submit-row{ padding:36px 48px 48px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .submit-row .note{ font-size:12.5px; color:#7280A0; max-width:46ch; }
+  button.submit{ font-family:var(--font-body); font-weight:700; font-size:15px; color:var(--white); background:var(--ink); border:none; padding:15px 32px; cursor:pointer; transition:background .2s ease, transform .15s ease; }
+  button.submit:hover{ background:#0F192D; transform:translateY(-1px); }
+
+  .error-msg{ color:var(--danger); font-size:12.5px; margin-top:6px; display:none; font-family:'IBM Plex Mono', monospace; }
+  .field.invalid .error-msg{ display:block; }
+  .field.invalid .choices span, .field.invalid select{ border-color:var(--danger); }
+
+  .overlay{ position:fixed; inset:0; background:rgba(22,35,61,0.72); display:none; align-items:center; justify-content:center; z-index:20; padding:20px; }
+  .overlay.show{ display:flex; }
+  .card{ background:var(--white); max-width:440px; width:100%; padding:40px 34px; text-align:center; border:1px solid var(--line); animation:rise .4s ease both; }
+  .card h3{ font-family:var(--font-display); font-size:23px; margin-bottom:12px; }
+  .card p{ color:#5A6785; font-size:14px; margin-bottom:22px; }
+  .card .actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .card button{ font-family:var(--font-body); font-size:13.5px; font-weight:600; padding:11px 18px; border:1px solid var(--ink); cursor:pointer; background:transparent; color:var(--ink); }
+  .card button.primary{ background:var(--ink); color:var(--white); }
+</style>
+</head>
+<body>
+
+<div class="lang-switch">
+  <button data-lang="ar" class="active">عربي</button>
+  <button data-lang="fr">FR</button>
+</div>
+
+<form class="sheet" id="surveyForm" novalidate>
+
+  <div class="masthead">
+    <div class="eyebrow">
+      <span data-i18n="eyebrow"></span>
+      <div class="seal" data-i18n="seal"></div>
+    </div>
+    <h1 data-i18n="title"></h1>
+    <div class="research-q">
+      <b data-i18n="rqLabel"></b>
+      <span data-i18n="researchQ"></span>
+    </div>
+    <div class="meta-row">
+      <span><span data-i18n="metaTime"></span></span>
+      <span><span data-i18n="metaConf"></span></span>
+    </div>
+  </div>
+
+  <div class="balance-bar">
+    <span data-i18n="progressLabel"></span>
+    <div class="track"><div class="fill" id="progressFill"></div></div>
+    <span id="progressPct">0%</span>
+  </div>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num" data-i18n="s0num"></span><h2 data-i18n="s0title"></h2></div>
+    <div id="section0"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num" data-i18n="s1num"></span><h2 data-i18n="s1title"></h2></div>
+    <div id="section1"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num" data-i18n="s2num"></span><h2 data-i18n="s2title"></h2></div>
+    <div id="section2"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num" data-i18n="s3num"></span><h2 data-i18n="s3title"></h2></div>
+    <div id="section3"></div>
+  </section>
+
+  <div class="submit-row">
+    <p class="note" data-i18n="submitNote"></p>
+    <button type="submit" class="submit" data-i18n="submitBtn"></button>
+  </div>
+</form>
+
+<div class="overlay" id="thanksOverlay">
+  <div class="card">
+    <div class="seal" style="margin:0 auto 16px;" data-i18n="seal2"></div>
+    <h3 data-i18n="thanksTitle"></h3>
+    <p data-i18n="thanksBody"></p>
+    <div class="actions">
+      <button class="primary" type="button" id="closeOverlay" data-i18n="closeBtn"></button>
+      <button type="button" id="newResponse" data-i18n="newBtn"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+const UI = {
+  ar: {
+    eyebrow:"استمارة بحث أكاديمي — رسالة تخرج", seal:"وثيقة\nبحثية", seal2:"تم\nالاستلام",
+    title:"أثر المحاسبة الدولية على الأسواق المالية ودورها في تطويرها",
+    rqLabel:"السؤال الرئيسي للبحث",
+    researchQ:"إلى أي مدى تؤثر المحاسبة الدولية، من خلال تطبيق معايير IFRS، على كفاءة وتطور الأسواق المالية؟",
+    metaTime:"المدة التقديرية: ٥-٧ دقائق", metaConf:"السرية: تامة",
+    progressLabel:"رصيد الإكمال",
+    s0num:"القسم ٠١", s0title:"البيانات العامة",
+    s1num:"القسم ٠٢", s1title:"المحاسبة الدولية",
+    s2num:"القسم ٠٣", s2title:"الأثر على الأسواق المالية",
+    s3num:"القسم ٠٤", s3title:"الدور في تطوير الأسواق المالية",
+    submitNote:"عند الإرسال، ستُنزَّل إجابتك تلقائيًا كملف نصي يمكن إرساله للباحث.",
+    submitBtn:"إرسال الإجابة",
+    thanksTitle:"شكرًا لمشاركتكم",
+    thanksBody:"تم تسجيل إجابتك بنجاح، وسيُنزَّل ملف يحتوي على إجاباتك. نقدّر وقتكم ومساهمتكم في هذا البحث.",
+    closeBtn:"إغلاق", newBtn:"تعبئة إجابة أخرى",
+    required:"هذا الحقل مطلوب", otherPh:"أخرى، يرجى التحديد"
+  },
+  fr: {
+    eyebrow:"Questionnaire de recherche — mémoire de fin d'études", seal:"Document\nde recherche", seal2:"Réponse\nreçue",
+    title:"L'impact de la comptabilité internationale sur les marchés financiers et son rôle dans leur développement",
+    rqLabel:"Question principale de recherche",
+    researchQ:"Dans quelle mesure la comptabilité internationale, à travers l'application des normes IFRS, influence-t-elle l'efficacité et le développement des marchés financiers ?",
+    metaTime:"Durée estimée : 5-7 minutes", metaConf:"Confidentialité : totale",
+    progressLabel:"Progression",
+    s0num:"Partie 00", s0title:"Informations générales",
+    s1num:"Partie I", s1title:"La comptabilité internationale",
+    s2num:"Partie II", s2title:"Impact sur les marchés financiers",
+    s3num:"Partie III", s3title:"Rôle dans le développement des marchés financiers",
+    submitNote:"En soumettant, votre réponse sera automatiquement téléchargée sous forme de fichier texte à transmettre au chercheur.",
+    submitBtn:"Envoyer ma réponse",
+    thanksTitle:"Merci pour votre participation",
+    thanksBody:"Votre réponse a bien été enregistrée et un fichier contenant vos réponses va être téléchargé. Merci pour votre temps et votre contribution à cette recherche.",
+    closeBtn:"Fermer", newBtn:"Remplir une autre réponse",
+    required:"Ce champ est requis", otherPh:"Autre, veuillez préciser"
+  }
+};
+
+const SCALE_AGREE = [
+  {v:"tout_a_fait_dacc", ar:"موافق بشدة", fr:"Tout à fait d'accord"},
+  {v:"dacc", ar:"موافق", fr:"D'accord"},
+  {v:"neutre", ar:"محايد", fr:"Neutre"},
+  {v:"pas_dacc", ar:"غير موافق", fr:"Pas d'accord"},
+  {v:"pas_du_tout_dacc", ar:"غير موافق بشدة", fr:"Pas du tout d'accord"}
+];
+const SCALE_INFLUENCE = [
+  {v:"tres_fortement", ar:"بشدة جدًا", fr:"Très fortement"},
+  {v:"fortement", ar:"بشدة", fr:"Fortement"},
+  {v:"moyennement", ar:"بشكل متوسط", fr:"Moyennement"},
+  {v:"faiblement", ar:"بشكل ضعيف", fr:"Faiblement"},
+  {v:"pas_du_tout", ar:"لا تؤثر إطلاقًا", fr:"Pas du tout"}
+];
+const OUI_NON = [{v:"oui",ar:"نعم",fr:"Oui"},{v:"non",ar:"لا",fr:"Non"}];
+const OUI_NON_SANS_OPINION = [{v:"oui",ar:"نعم",fr:"Oui"},{v:"non",ar:"لا",fr:"Non"},{v:"sans_opinion",ar:"بدون رأي",fr:"Sans opinion"}];
+const OUI_NON_PEUT_ETRE = [{v:"oui",ar:"نعم",fr:"Oui"},{v:"non",ar:"لا",fr:"Non"},{v:"peut_etre",ar:"ربما",fr:"Peut-être"}];
+
+const SECTIONS = {
+  section0: [
+    { id:"q1", type:"choice", ar:"الجنس", fr:"Sexe", req:true,
+      opts:[{v:"homme",ar:"ذكر",fr:"Homme"},{v:"femme",ar:"أنثى",fr:"Femme"}] },
+    { id:"q2", type:"choice", ar:"العمر", fr:"Âge", req:true,
+      opts:[{v:"lt25",ar:"أقل من 25 سنة",fr:"Moins de 25 ans"},{v:"25_35",ar:"25–35 سنة",fr:"25–35 ans"},
+            {v:"36_45",ar:"36–45 سنة",fr:"36–45 ans"},{v:"gt45",ar:"أكثر من 45 سنة",fr:"Plus de 45 ans"}] },
+    { id:"q3", type:"choice", ar:"المهنة", fr:"Profession", req:true, other:true,
+      opts:[{v:"etudiant",ar:"طالب",fr:"Étudiant"},{v:"comptable",ar:"محاسب",fr:"Comptable"},
+            {v:"auditeur",ar:"مدقق حسابات",fr:"Auditeur"},{v:"investisseur",ar:"مستثمر",fr:"Investisseur"},
+            {v:"autre",ar:"أخرى",fr:"Autre"}] },
+    { id:"q4", type:"choice", ar:"المستوى الدراسي", fr:"Niveau d'études", req:true, other:true,
+      opts:[{v:"licence",ar:"إجازة (ليسانس)",fr:"Licence"},{v:"master",ar:"ماستر",fr:"Master"},
+            {v:"doctorat",ar:"دكتوراه",fr:"Doctorat"},{v:"autre",ar:"أخرى",fr:"Autre"}] }
+  ],
+  section1: [
+    { id:"q5", type:"choice", ar:"هل تعرف معايير التقارير المالية الدولية (IFRS)؟", fr:"Connaissez-vous les normes internationales d'information financière (IFRS) ?", req:true, opts:OUI_NON },
+    { id:"q6", num:1, type:"scale", ar:"هل تعتقد أن تطبيق معايير IFRS يحسّن جودة المعلومة المالية؟", fr:"Pensez-vous que l'application des IFRS améliore la qualité de l'information financière ?", req:true, opts:SCALE_AGREE },
+    { id:"q7", num:2, type:"scale", ar:"هل تسهّل المعايير المحاسبية الدولية مقارنة القوائم المالية بين الشركات؟", fr:"Les normes comptables internationales facilitent-elles la comparaison des états financiers entre les entreprises ?", req:true, opts:OUI_NON_SANS_OPINION },
+    { id:"q8", num:3, type:"scale", ar:"برأيك، هل تعزز المحاسبة الدولية الشفافية المالية؟", fr:"Selon vous, la comptabilité internationale renforce-t-elle la transparence financière ?", req:true, opts:OUI_NON }
+  ],
+  section2: [
+    { id:"q9", num:1, type:"scale", ar:"هل تؤثر جودة المعلومة المحاسبية على قرارات المستثمرين؟", fr:"La qualité de l'information comptable influence-t-elle les décisions des investisseurs ?", req:true, opts:SCALE_INFLUENCE },
+    { id:"q10", num:2, type:"scale", ar:"هل تساهم المعايير المحاسبية الدولية في تقليل عدم تماثل المعلومات في الأسواق المالية؟", fr:"Les normes comptables internationales contribuent-elles à réduire l'asymétrie d'information sur les marchés financiers ?", req:true, opts:SCALE_AGREE },
+    { id:"q11", num:3, type:"scale", ar:"هل تعتقد أن اعتماد معايير IFRS يجذب المزيد من المستثمرين الأجانب؟", fr:"Pensez-vous que l'adoption des IFRS attire davantage d'investisseurs étrangers ?", req:true, opts:OUI_NON_PEUT_ETRE },
+    { id:"q12", num:4, type:"scale", ar:"هل تساهم المحاسبة الدولية في تعزيز ثقة المستثمرين؟", fr:"La comptabilité internationale contribue-t-elle à renforcer la confiance des investisseurs ?", req:true, opts:OUI_NON }
+  ],
+  section3: [
+    { id:"q13", num:1, type:"scale", ar:"هل يفضّل تطبيق المعايير الدولية تطوّر الأسواق المالية؟", fr:"L'application des normes internationales favorise-t-elle le développement des marchés financiers ?", req:true, opts:SCALE_AGREE },
+    { id:"q14", num:2, type:"scale", ar:"هل تكون الأسواق المالية أكثر كفاءة عندما تكون المعلومة المالية شفافة؟", fr:"Les marchés financiers sont-ils plus efficaces lorsque l'information financière est transparente ?", req:true, opts:OUI_NON },
+    { id:"q15", num:3, type:"scale", ar:"هل تسهّل المحاسبة الدولية وصول الشركات إلى التمويل؟", fr:"La comptabilité internationale facilite-t-elle l'accès des entreprises aux financements ?", req:true, opts:OUI_NON },
+    { id:"q16", type:"choice", ar:"برأيك، ما هو أهم فائدة للمحاسبة الدولية؟", fr:"Selon vous, quel est le principal avantage de la comptabilité internationale ?", req:true, other:true,
+      opts:[{v:"transparence",ar:"الشفافية",fr:"Transparence"},{v:"comparabilite",ar:"قابلية المقارنة",fr:"Comparabilité"},
+            {v:"attractivite",ar:"جاذبية للمستثمرين",fr:"Attractivité pour les investisseurs"},
+            {v:"reduction_risques",ar:"تقليل المخاطر",fr:"Réduction des risques"},{v:"autre",ar:"أخرى",fr:"Autre"}] },
+    { id:"q17", type:"choice", ar:"هل توصي باعتماد المعايير الدولية لجميع الشركات المدرجة؟", fr:"Recommanderiez-vous l'adoption des normes internationales à toutes les entreprises cotées ?", req:true, opts:OUI_NON },
+    { id:"q18", type:"open", ar:"هل لديك اقتراحات أو تعليقات بخصوص دور المحاسبة الدولية في تطوير الأسواق المالية؟", fr:"Avez-vous des suggestions ou commentaires concernant le rôle de la comptabilité internationale dans le développement des marchés financiers ?", req:false }
+  ]
+};
+
+// الصفحة الآن تُقدَّم من نفس الخادم، لذا نستخدم مسارًا نسبيًا مباشرة
+const API_BASE = "";
+
+let currentLang = "ar";
+const allQuestions = [...SECTIONS.section0, ...SECTIONS.section1, ...SECTIONS.section2, ...SECTIONS.section3];
+
+function fieldHTML(q){
+  const label = q.num
+    ? `<span class="num">${String(q.num).padStart(2,'0')}</span><span class="qtext" data-q="${q.id}"></span>`
+    : `<span class="qtext" data-q="${q.id}"></span>`;
+  const req = q.req ? '<span class="req">*</span>' : '';
+
+  if(q.type === "open"){
+    return `<div class="field">
+      <label class="q">${label}${req}</label>
+      <textarea name="${q.id}" placeholder=""></textarea>
+    </div>`;
+  }
+
+  if(q.type === "choice"){
+    const choices = q.opts.map(o => `
+      <label class="choice">
+        <input type="radio" name="${q.id}" value="${o.v}" ${q.other ? `data-other="${o.v==='autre'?'1':'0'}"` : ''}>
+        <span class="opt-text" data-opt="${q.id}:${o.v}"></span>
+      </label>`).join('');
+    const otherField = q.other ? `<div class="other-input" data-other-for="${q.id}"><input type="text" name="${q.id}_autre" class="other-text-ph"></div>` : '';
+    return `<div class="field" data-required="radio" data-name="${q.id}">
+      <label class="q">${label}${req}</label>
+      <div class="choices">${choices}</div>
+      ${otherField}
+      <div class="error-msg" data-err="${q.id}"></div>
+    </div>`;
+  }
+
+  // scale (rendered as a likert row inside a wrapper with header)
+  const cells = q.opts.map(o => `<div class="likert-cell"><input type="radio" name="${q.id}" value="${o.v}"></div>`).join('');
+  return `<div class="likert-row field" data-required="radio" data-name="${q.id}">
+    <div class="stmt">${label}</div>
+    <div class="opts" style="display:contents">${cells}</div>
+    <div class="error-msg" data-err="${q.id}" style="grid-column:1/-1"></div>
+  </div>`;
+}
+
+function renderSection(containerId, items){
+  const el = document.getElementById(containerId);
+  // group consecutive scale items under one header
+  let html = "";
+  let inScaleGroup = false;
+  items.forEach((q, i) => {
+    if(q.type === "scale" && !inScaleGroup){
+      html += `<div class="likert-header" data-scale-header="${containerId}-${i}">
+        <span class="lbl"></span>
+        <span data-scale-lbl="0"></span><span data-scale-lbl="1"></span><span data-scale-lbl="2"></span><span data-scale-lbl="3"></span><span data-scale-lbl="4"></span>
+      </div>`;
+      inScaleGroup = true;
+    }
+    if(q.type !== "scale") inScaleGroup = false;
+    html += fieldHTML(q);
+  });
+  el.innerHTML = html;
+}
+
+renderSection('section0', SECTIONS.section0);
+renderSection('section1', SECTIONS.section1);
+renderSection('section2', SECTIONS.section2);
+renderSection('section3', SECTIONS.section3);
+
+function applyLang(lang){
+  currentLang = lang;
+  const t = UI[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.documentElement.className = "lang-" + lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.dataset.i18n;
+    if(t[key] !== undefined) el.textContent = t[key];
+  });
+
+  document.querySelectorAll('[data-q]').forEach(el=>{
+    const q = allQuestions.find(x => x.id === el.dataset.q);
+    if(q) el.textContent = q[lang];
+  });
+
+  document.querySelectorAll('[data-opt]').forEach(el=>{
+    const [qid, val] = el.dataset.opt.split(':');
+    const q = allQuestions.find(x => x.id === qid);
+    const o = q.opts.find(o => o.v === val);
+    if(o) el.textContent = o[lang];
+  });
+
+  document.querySelectorAll('.other-text-ph').forEach(inp=>{
+    inp.placeholder = t.otherPh;
+  });
+
+  document.querySelectorAll('[data-err]').forEach(el=> el.textContent = t.required);
+
+  // scale headers: use SCALE_AGREE labels as default header text (they align by column position across all scale types)
+  document.querySelectorAll('[data-scale-header]').forEach(header=>{
+    const labels = header.nextElementSibling && header.nextElementSibling.dataset.name
+      ? (allQuestions.find(q=>q.id===header.nextElementSibling.dataset.name)||{}).opts
+      : SCALE_AGREE;
+    const use = labels || SCALE_AGREE;
+    header.querySelectorAll('[data-scale-lbl]').forEach((cell,i)=>{
+      cell.textContent = use[i] ? use[i][lang] : '';
+    });
+  });
+
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+
+  updateProgress();
+}
+
+// other-field toggle
+document.getElementById('surveyForm').addEventListener('change', (e)=>{
+  if(e.target.matches('input[type="radio"][data-other]')){
+    const qid = e.target.name;
+    const wrap = document.querySelector(`[data-other-for="${qid}"]`);
+    if(wrap) wrap.classList.toggle('show', e.target.dataset.other === "1");
+  }
+});
+
+const form = document.getElementById('surveyForm');
+const fill = document.getElementById('progressFill');
+const pct = document.getElementById('progressPct');
+const arDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function toArNum(n){ return String(n).split('').map(d => arDigits[+d] ?? d).join(''); }
+
+function updateProgress(){
+  let total = allQuestions.filter(q=>q.req).length;
+  let done = 0;
+  allQuestions.forEach(q=>{ if(q.req && form.querySelector(`input[name="${q.id}"]:checked`)) done++; });
+  const p = total ? Math.round((done/total)*100) : 0;
+  fill.style.width = p + '%';
+  pct.textContent = currentLang === 'ar' ? toArNum(p) + '٪' : p + '%';
+}
+form.addEventListener('change', updateProgress);
+
+function buildSummary(){
+  const data = new FormData(form);
+  let lines = [];
+  lines.push(UI[currentLang].title);
+  lines.push(new Date().toLocaleString(currentLang==='ar'?'ar':'fr'));
+  lines.push('----------------------------------------');
+  let lastSection = '';
+  allQuestions.forEach(q=>{
+    const val = data.get(q.id);
+    let display = val;
+    if(q.type !== 'open' && q.opts){
+      const o = q.opts.find(o=>o.v===val);
+      display = o ? o[currentLang] : (val||'');
+      if(val === 'autre'){ const other = data.get(q.id+'_autre'); if(other) display += ' - ' + other; }
+    }
+    lines.push(q[currentLang] + '  =>  ' + (display || ''));
+  });
+  return lines.join('\n');
+}
+
+function downloadTextFile(content){
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'reponse_' + Date.now() + '.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function buildAnswersPayload(){
+  const data = new FormData(form);
+  const answers = {};
+  allQuestions.forEach(q=>{
+    answers[q.id] = data.get(q.id) || '';
+    if(q.other) answers[q.id + '_autre'] = data.get(q.id + '_autre') || '';
+  });
+  return answers;
+}
+
+async function sendToServer(){
+  try{
+    const res = await fetch(API_BASE + '/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lang: currentLang, answers: buildAnswersPayload() })
+    });
+    return res.ok;
+  }catch(err){
+    console.warn('تعذر إرسال الإجابة إلى الخادم:', err);
+    return false;
+  }
+}
+
+form.addEventListener('submit', async function(e){
+  e.preventDefault();
+  let valid = true, firstInvalid = null;
+  allQuestions.filter(q=>q.req).forEach(q=>{
+    const field = form.querySelector(`[data-name="${q.id}"]`);
+    const ok = q.type === 'choice' || q.type === 'scale'
+      ? !!form.querySelector(`input[name="${q.id}"]:checked`)
+      : true;
+    field.classList.toggle('invalid', !ok);
+    if(!ok){ valid = false; firstInvalid = firstInvalid || field; }
+  });
+  if(!valid){ firstInvalid.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+
+  const submitBtn = form.querySelector('button.submit');
+  submitBtn.disabled = true;
+
+  await sendToServer(); // يسجَّل في قاعدة البيانات إن كان الخادم متاحًا
+  downloadTextFile(buildSummary()); // نسخة احتياطية محلية دائمًا
+
+  submitBtn.disabled = false;
+  document.getElementById('thanksOverlay').classList.add('show');
+});
+
+document.getElementById('closeOverlay').addEventListener('click', ()=>{
+  document.getElementById('thanksOverlay').classList.remove('show');
+});
+document.getElementById('newResponse').addEventListener('click', ()=>{
+  form.reset();
+  document.querySelectorAll('.other-input').forEach(w=>w.classList.remove('show'));
+  document.querySelectorAll('.field').forEach(f=>f.classList.remove('invalid'));
+  updateProgress();
+  document.getElementById('thanksOverlay').classList.remove('show');
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+document.querySelectorAll('.lang-switch button').forEach(b=>{
+  b.addEventListener('click', ()=> applyLang(b.dataset.lang));
+});
+
+applyLang('ar');
+</script>
+
+</body>
+</html>
