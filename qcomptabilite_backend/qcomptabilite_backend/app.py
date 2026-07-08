@@ -3,6 +3,7 @@ Backend لاستبيان: أثر المحاسبة الدولية على الأس
 - يسجل كل إجابة في قاعدة بيانات SQLite
 - لوحة إدارة (HTML/CSS) لعرض الإجابات
 - تصدير أي إجابة، أو كل الإجابات، إلى ملف Word بضغطة واحدة
+- رسوم بيانية لإحصائيات الإجابات (لوحة الإدارة + تصدير Word)
 """
 
 import os
@@ -443,6 +444,18 @@ def admin_stats():
     db = get_db()
     total = db.execute("SELECT COUNT(*) AS c FROM responses").fetchone()["c"]
     return render_template("stats.html", stats=stats, total=total)
+
+
+@app.route("/admin/stats/chart/<question_id>.png")
+@login_required
+def admin_stat_chart_image(question_id):
+    stats = compute_question_stats()
+    stat = next((s for s in stats if s["id"] == question_id), None)
+    if stat is None:
+        flash("سؤال غير معروف")
+        return redirect(url_for("admin_stats"))
+    img_buf = generate_stat_chart_image(stat)
+    return send_file(img_buf, mimetype="image/png")
 
 
 @app.route("/admin/response/<int:response_id>")
