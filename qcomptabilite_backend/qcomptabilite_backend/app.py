@@ -362,7 +362,8 @@ def generate_stat_chart_image(stat):
             ax.text(x, y, ar_text(pct), ha="center", va="center", color="white",
                      fontproperties=AR_FONT, fontsize=11)
         ax.legend(
-            wedges, [ar_text(l) for l in labels], loc="center left",
+            [plt.Rectangle((0, 0), 1, 1, facecolor=c) for c in colors],
+            [ar_text(l) for l in labels], loc="center left",
             bbox_to_anchor=(1.02, 0.5), prop=AR_FONT, frameon=False, fontsize=10.5,
         )
         ax.axis("equal")
