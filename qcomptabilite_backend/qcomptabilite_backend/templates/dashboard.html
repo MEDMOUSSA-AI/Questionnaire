@@ -78,8 +78,7 @@
     </div>
     <div class="actions">
       {% if total > 0 %}
-      <a class="btn ghost" href="{{ url_for('admin_stats') }}">📊 الإحصائيات</a>
-      <a class="btn ghost" href="{{ url_for('admin_export_stats_word') }}">⬇ الإحصائيات (Word)</a>
+      <a class="btn ghost" href="{{ url_for('admin_stats') }}">📊 الإحصائيات والرسوم البيانية</a>
       <a class="btn primary" href="{{ url_for('admin_export_all_word') }}">⬇ تنزيل كل الإجابات (Word)</a>
       {% endif %}
       <a class="btn ghost" href="{{ url_for('admin_logout') }}">تسجيل الخروج</a>
