@@ -5,3 +5,4 @@ gunicorn==22.0.0
 matplotlib==3.9.2
 arabic-reshaper==3.0.0
 python-bidi==0.4.2
+psycopg2-binary==2.9.9
